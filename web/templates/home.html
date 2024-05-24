@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- ========================= SECTION MAIN ========================= -->
+<section id="inicio" class="section-name padding-y-sm">
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'img/blue.png' %}" class="img-fluid" alt="blue-gato" style="width: 40%; height: auto;">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/blue.png' %}" class="img-fluid" alt="blue-gato" style="width: 40%; height: auto;">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/blue.png' %}" class="img-fluid" alt="blue-gato" style="width: 40%; height: auto;">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+
+<section class="section-name padding-y-sm">
+    <div class="container">
+
+        <header class="section-heading">
+
+        </header><!-- sect-heading -->
+        <div class="container py-4">
+            
+            <br>
+            <br>
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold">Bienvenidos a OnlyFlans</h1>
+                    <p class="col-md-8 fs-4">Pasteles y flanes que pagarías solo por ver, imagina comer!</p>
+                    <p>Con más de 10 años enfocados pasteleria de alto nivel</b>
+                    <a class="btn btn-primary btn-lg" href="#" type="button">Contáctanos</a>
+                </div>
+            </div>
+
+        </div> <!-- row.// -->
+
+    </div><!-- container // -->
+</section>
+{% endblock %}
+{% comment %} <!-- ========================= Cursos  Tecnologia ========================= -->
+<div id="cursos_tecnologia" class="container">
+  <br><br>
+  <h2 class="text-center mt-5">Cursos de Tecnología</h2>
+  <br>
+  <div class="row">
+    {% for curso in get_cursos %}
+      {% if curso.categorias.slug == 'tecnologia' %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <a href="{% url 'detalle_curso' curso.slug %}">
+              <img src="{{ curso.photo.url }}" class="card-img-top" alt="{{ curso.nombre }}">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="{% url 'detalle_curso' curso.slug %}">{{ curso.nombre }}</a>
+              </h5>
+              <p class="card-text">{{ curso.descripcion }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>Modalidad:</strong> {{ curso.get_modalidad_display }}</li>
+              <li class="list-group-item"><strong>Duración:</strong> {{ curso.duracion }}</li>
+              <li class="list-group-item"><strong>Descripción:</strong> {{ curso.descripcion_breve }}</li>
+            </ul>
+            <div class="card-body">
+              {% for tag in curso.tags.all %}
+                <a href="{% url 'cursos_por_tag' tag=tag %}">
+                  <button type="button" class="btn btn-warning">{{ tag }}</button>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div> {% endcomment %}

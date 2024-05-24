@@ -124,6 +124,7 @@ STATIC_ROOT = 'static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'onlyflans\static'),
+
 ]
 
 
